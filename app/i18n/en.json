@@ -1,0 +1,12 @@
+{
+  "WELCOME_TITLE": "Welcome to DS Nursing Online Class",
+  "WELCOME_DESC": "We are ready to help you with class information and registration.",
+  "CHOOSE_LANGUAGE": "Please choose your preferred language.",
+  "LANGUAGE_SELECTED": "Language set to English.",
+  "MAIN_MENU_TITLE": "Main Menu",
+  "MAIN_MENU_PROMPT": "Please choose one of the following options:",
+  "MENU_REGISTER": "Register for a Class",
+  "MENU_FAQ": "FAQs",
+  "MENU_CONTACT_ADMIN": "Contact Admin",
+  "MENU_CHANGE_LANGUAGE": "Change Language"
+}

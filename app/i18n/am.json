@@ -1,0 +1,12 @@
+{
+  "WELCOME_TITLE": "እንኳን ወደ DS የነርሲንግ ኦንላይን ትምህርት በደህና መጡ",
+  "WELCOME_DESC": "ስለ ትምህርቱ መረጃ ለመስጠትና ለምዝገባ ዝግጁ ነን።",
+  "CHOOSE_LANGUAGE": "እባክዎ የሚፈልጉትን ቋንቋ ይምረጡ።",
+  "LANGUAGE_SELECTED": "ቋንቋው ወደ አማርኛ ተቀይሯል።",
+  "MAIN_MENU_TITLE": "ዋና ማውጫ",
+  "MAIN_MENU_PROMPT": "እባክዎ ከሚከተሉት አማራጮች አንዱን ይምረጡ፦",
+  "MENU_REGISTER": "ለክፍል ይመዝገቡ",
+  "MENU_FAQ": "ተዘውታሪ ጥያቄዎች (FAQ)",
+  "MENU_CONTACT_ADMIN": "አስተዳዳሪውን ያግኙ",
+  "MENU_CHANGE_LANGUAGE": "ቋንቋ ይቀይሩ"
+}
