@@ -52,6 +52,21 @@
   "REG_CANCELLED": "Registration cancelled.",
   "REG_SUCCESS": "Your registration details have been received successfully.",
   "REG_INVALID_PHONE": "Please enter a valid Ethiopian phone number. Example: 0912345678, 0712345678, or +251912345678.",
-  "REG_INVALID_TEXT": "Please send text only."
+  "REG_INVALID_TEXT": "Please send text only.",
 
+  "REG_HANDOFF_TITLE": "Registration Successful",
+  "REG_HANDOFF_DESC": "Your registration has been recorded successfully. A class assistant will help you continue the next steps.",
+  "REG_CONTACT_ADMIN": "Please contact the admin on Telegram:",
+  "CONTACT_ADMIN_BUTTON": "Contact Admin",
+
+  "ADMIN_NEW_REG_TITLE": "New Registration",
+  "ADMIN_NAME_LABEL": "Name",
+  "ADMIN_DEPARTMENT_LABEL": "Department",
+  "ADMIN_PHONE_LABEL": "Phone",
+  "ADMIN_CLASS_LABEL": "Class",
+  "ADMIN_LANGUAGE_LABEL": "Language",
+  "ADMIN_USERNAME_LABEL": "Username",
+  "ADMIN_USER_ID_LABEL": "User ID",
+  "ADMIN_USERNAME_MISSING": "Not available"
 }
+

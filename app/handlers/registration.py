@@ -11,7 +11,9 @@ from app.states.registration import RegistrationForm
 from app.utils.i18n import t
 from app.database.session import AsyncSessionLocal
 from app.services.registration_service import create_registration
-
+from app.config.settings import get_settings
+from app.keyboards.contact import contact_admin_keyboard
+from app.services.notification_service import notify_admins_new_registration
 router = Router()
 
 
@@ -122,9 +124,10 @@ async def process_phone(message: Message, state: FSMContext) -> None:
 async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> None:
     lang = get_user_language(callback.from_user.id)
     data = await state.get_data()
+    settings = get_settings()
 
     async with AsyncSessionLocal() as session:
-        await create_registration(
+        registration = await create_registration(
             session=session,
             telegram_user_id=callback.from_user.id,
             telegram_username=callback.from_user.username,
@@ -136,11 +139,20 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
             class_name=data["class_name"],
         )
 
+    await notify_admins_new_registration(callback.bot, registration)
+
     await state.clear()
 
+    handoff_text = (
+        f"<b>{t(lang, 'REG_HANDOFF_TITLE')}</b>\n\n"
+        f"{t(lang, 'REG_HANDOFF_DESC')}\n\n"
+        f"{t(lang, 'REG_CONTACT_ADMIN')} "
+        f"<b>@{settings.admin_username}</b>"
+    )
+
     await callback.message.edit_text(
-        text=f"{t(lang, 'REG_SUCCESS')}\n\n{t(lang, 'MAIN_MENU_PROMPT')}",
-        reply_markup=main_menu_keyboard(lang),
+        text=handoff_text,
+        reply_markup=contact_admin_keyboard(lang, settings.admin_username),
     )
     await callback.answer()
 

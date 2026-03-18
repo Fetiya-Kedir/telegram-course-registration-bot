@@ -51,5 +51,20 @@
   "REG_CANCELLED": "ምዝገባው ተሰርዟል።",
   "REG_SUCCESS": "የምዝገባ መረጃዎ በተሳካ ሁኔታ ደርሶናል።",
   "REG_INVALID_PHONE": "እባክዎ ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ። ምሳሌ፦ 0912345678፣ 0712345678 ወይም +251912345678።",
-  "REG_INVALID_TEXT": "እባክዎ ጽሑፍ ብቻ ይላኩ።"
+  "REG_INVALID_TEXT": "እባክዎ ጽሑፍ ብቻ ይላኩ።",
+
+  "REG_HANDOFF_TITLE": "ምዝገባው ተሳክቷል",
+  "REG_HANDOFF_DESC": "ምዝገባዎ በተሳካ ሁኔታ ተመዝግቧል። የክፍል ረዳት ቀጣይ እርምጃዎችን እንዲጨርሱ ይረዳዎታል።",
+  "REG_CONTACT_ADMIN": "እባክዎ በቴሌግራም አስተዳዳሪውን ያነጋግሩ፦",
+  "CONTACT_ADMIN_BUTTON": "አስተዳዳሪውን ያግኙ",
+
+  "ADMIN_NEW_REG_TITLE": "አዲስ ምዝገባ",
+  "ADMIN_NAME_LABEL": "ስም",
+  "ADMIN_DEPARTMENT_LABEL": "የትምህርት ክፍል",
+  "ADMIN_PHONE_LABEL": "ስልክ",
+  "ADMIN_CLASS_LABEL": "ክፍል",
+  "ADMIN_LANGUAGE_LABEL": "ቋንቋ",
+  "ADMIN_USERNAME_LABEL": "ዩዘርኔም (Username)",
+  "ADMIN_USER_ID_LABEL": "የተጠቃሚ መለያ (User ID)",
+  "ADMIN_USERNAME_MISSING": "አልተገኘም"
 }
