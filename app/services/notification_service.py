@@ -15,6 +15,7 @@ def format_admin_registration_message(registration: Registration) -> str:
 
     return (
         f"<b>{t(registration.language, 'ADMIN_NEW_REG_TITLE')}</b>\n\n"
+        f"{t(registration.language, 'ADMIN_REFERENCE_LABEL')}: <b>{registration.reference_code}</b>\n"
         f"{t(registration.language, 'ADMIN_NAME_LABEL')}: <b>{registration.full_name}</b>\n"
         f"{t(registration.language, 'ADMIN_DEPARTMENT_LABEL')}: <b>{registration.department}</b>\n"
         f"{t(registration.language, 'ADMIN_PHONE_LABEL')}: <b>{registration.phone}</b>\n"

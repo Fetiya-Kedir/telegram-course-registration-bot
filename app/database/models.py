@@ -10,6 +10,8 @@ class Registration(Base):
     __tablename__ = "registrations"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    reference_code: Mapped[str | None] = mapped_column(String(50), nullable=True, unique=True)
+
     telegram_user_id: Mapped[int] = mapped_column(Integer, index=True)
     telegram_username: Mapped[str | None] = mapped_column(String(100), nullable=True)
     full_name: Mapped[str] = mapped_column(String(200))

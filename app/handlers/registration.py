@@ -146,6 +146,7 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
     handoff_text = (
         f"<b>{t(lang, 'REG_HANDOFF_TITLE')}</b>\n\n"
         f"{t(lang, 'REG_HANDOFF_DESC')}\n\n"
+        f"{t(lang, 'REG_REFERENCE_LABEL')}: <b>{registration.reference_code}</b>\n\n"
         f"{t(lang, 'REG_CONTACT_ADMIN')} "
         f"<b>@{settings.admin_username}</b>"
     )
@@ -155,7 +156,6 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
         reply_markup=contact_admin_keyboard(lang, settings.admin_username),
     )
     await callback.answer()
-
 
 @router.callback_query(F.data == "reg:cancel")
 async def cancel_registration(callback: CallbackQuery, state: FSMContext) -> None:

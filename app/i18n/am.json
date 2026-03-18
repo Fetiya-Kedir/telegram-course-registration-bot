@@ -66,5 +66,8 @@
   "ADMIN_LANGUAGE_LABEL": "ቋንቋ",
   "ADMIN_USERNAME_LABEL": "ዩዘርኔም (Username)",
   "ADMIN_USER_ID_LABEL": "የተጠቃሚ መለያ (User ID)",
-  "ADMIN_USERNAME_MISSING": "አልተገኘም"
+  "ADMIN_USERNAME_MISSING": "አልተገኘም",
+
+  "REG_REFERENCE_LABEL": "የምዝገባ ኮድ",
+  "ADMIN_REFERENCE_LABEL": "የምዝገባ ኮድ"
 }

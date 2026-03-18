@@ -67,6 +67,9 @@
   "ADMIN_LANGUAGE_LABEL": "Language",
   "ADMIN_USERNAME_LABEL": "Username",
   "ADMIN_USER_ID_LABEL": "User ID",
-  "ADMIN_USERNAME_MISSING": "Not available"
+  "ADMIN_USERNAME_MISSING": "Not available",
+
+  "REG_REFERENCE_LABEL": "Reference Code",
+  "ADMIN_REFERENCE_LABEL": "Reference Code"
 }
 
