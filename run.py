@@ -8,6 +8,7 @@ from aiogram.enums import ParseMode
 from app.config.settings import get_settings
 from app.handlers.start import router as start_router
 from app.handlers.language import router as language_router
+from app.handlers.menu import router as menu_router
 from app.utils.i18n import load_translations
 
 
@@ -28,6 +29,7 @@ async def main() -> None:
 
     dp.include_router(start_router)
     dp.include_router(language_router)
+    dp.include_router(menu_router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

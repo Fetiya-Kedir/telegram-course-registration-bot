@@ -8,5 +8,33 @@
   "MENU_REGISTER": "Register for a Class",
   "MENU_FAQ": "FAQs",
   "MENU_CONTACT_ADMIN": "Contact Admin",
-  "MENU_CHANGE_LANGUAGE": "Change Language"
+  "MENU_CHANGE_LANGUAGE": "Change Language",
+
+  "CONTACT_TITLE": "Contact Admin",
+  "CONTACT_DESC": "Telegram support contact will be added next.",
+
+  "NAV_BACK_MAIN": "Back to Main Menu",
+
+  "FAQ_TITLE": "Frequently Asked Questions",
+  "FAQ_PROMPT": "Choose a question below:",
+  "FAQ_Q1": "How do I register?",
+  "FAQ_A1": "Select 'Register for a Class', choose your class, submit your details, then follow the payment instructions.",
+  "FAQ_Q2": "How do I pay?",
+  "FAQ_A2": "After registration, the bot will send the bank account details. Once you pay, send your payment screenshot for review.",
+  "FAQ_Q3": "When will I get access to the class?",
+  "FAQ_A3": "After your payment is verified, you will receive the private class link or invitation.",
+  "FAQ_Q4": "Who do I contact for help?",
+  "FAQ_A4": "Use the 'Contact Admin' menu option to reach the support team.",
+
+  "CLASS_TITLE": "Class Registration",
+  "CLASS_PROMPT": "Which class would you like to register for?",
+  "CLASS_1": "Exit Exam Preparation",
+  "CLASS_2": "Licensure / COC Exam Preparation",
+  "CLASS_3": "NCLEX Exam Preparation",
+  "CLASS_4": "DHA Exam Preparation",
+  "CLASS_5": "Case to Care Mind Class",
+  "CLASS_6": "Skill Mind Class",
+
+  "CLASS_SELECTED_PREFIX": "You selected:",
+  "NEXT_STEP_REGISTRATION": "The registration form will be added next."
 }
