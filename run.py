@@ -4,11 +4,14 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.fsm.storage.memory import MemoryStorage
 
 from app.config.settings import get_settings
+from app.database.session import init_db
 from app.handlers.start import router as start_router
 from app.handlers.language import router as language_router
 from app.handlers.menu import router as menu_router
+from app.handlers.registration import router as registration_router
 from app.utils.i18n import load_translations
 
 
@@ -19,17 +22,20 @@ async def main() -> None:
     )
 
     load_translations()
+    await init_db()
     settings = get_settings()
 
     bot = Bot(
         token=settings.bot_token,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
-    dp = Dispatcher()
+
+    dp = Dispatcher(storage=MemoryStorage())
 
     dp.include_router(start_router)
     dp.include_router(language_router)
     dp.include_router(menu_router)
+    dp.include_router(registration_router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

@@ -36,5 +36,22 @@
   "CLASS_6": "Skill Mind Class",
 
   "CLASS_SELECTED_PREFIX": "You selected:",
-  "NEXT_STEP_REGISTRATION": "The registration form will be added next."
+  "NEXT_STEP_REGISTRATION": "The registration form will be added next.",
+
+  "REG_ASK_NAME": "Please enter your full name.",
+  "REG_ASK_DEPARTMENT": "Please enter your department or field of study.",
+  "REG_ASK_PHONE": "Please enter your phone number.",
+  "REG_SUMMARY_TITLE": "Registration Summary",
+  "REG_NAME_LABEL": "Full Name",
+  "REG_DEPARTMENT_LABEL": "Department",
+  "REG_PHONE_LABEL": "Phone",
+  "REG_CLASS_LABEL": "Class",
+  "REG_CONFIRM_PROMPT": "Please confirm your registration details.",
+  "REG_CONFIRM": "Confirm",
+  "REG_CANCEL": "Cancel",
+  "REG_CANCELLED": "Registration cancelled.",
+  "REG_SUCCESS": "Your registration details have been received successfully.",
+  "REG_INVALID_PHONE": "Please enter a valid Ethiopian phone number. Example: 0912345678, 0712345678, or +251912345678.",
+  "REG_INVALID_TEXT": "Please send text only."
+
 }

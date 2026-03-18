@@ -105,21 +105,3 @@ async def faq_answer_handler(callback: CallbackQuery) -> None:
     )
     await callback.answer()
 
-
-@router.callback_query(F.data.startswith("class:"))
-async def class_selected_handler(callback: CallbackQuery) -> None:
-    lang = get_user_language(callback.from_user.id)
-    class_id = callback.data.split(":")[1]
-    class_key = f"CLASS_{class_id}"
-
-    text = (
-        f"<b>{t(lang, 'CLASS_TITLE')}</b>\n\n"
-        f"{t(lang, 'CLASS_SELECTED_PREFIX')} <b>{t(lang, class_key)}</b>\n\n"
-        f"{t(lang, 'NEXT_STEP_REGISTRATION')}"
-    )
-
-    await callback.message.edit_text(
-        text=text,
-        reply_markup=back_to_main_keyboard(lang),
-    )
-    await callback.answer()

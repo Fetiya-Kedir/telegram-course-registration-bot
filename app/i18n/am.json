@@ -36,5 +36,20 @@
   "CLASS_6": "Skill Mind Class",
 
   "CLASS_SELECTED_PREFIX": "የመረጡት ክፍል፦",
-  "NEXT_STEP_REGISTRATION": "ቀጥሎ የምዝገባ ፎርሙ ይቀርባል።"
+  "NEXT_STEP_REGISTRATION": "ቀጥሎ የምዝገባ ፎርሙ ይቀርባል።",
+  "REG_ASK_NAME": "እባክዎ ሙሉ ስምዎን ያስገቡ።",
+  "REG_ASK_DEPARTMENT": "እባክዎ የትምህርት ክፍልዎን ወይም የጥናት መስክዎን ያስገቡ።",
+  "REG_ASK_PHONE": "እባክዎ ስልክ ቁጥርዎን ያስገቡ።",
+  "REG_SUMMARY_TITLE": "የምዝገባ ማጠቃለያ",
+  "REG_NAME_LABEL": "ሙሉ ስም",
+  "REG_DEPARTMENT_LABEL": "የትምህርት ክፍል",
+  "REG_PHONE_LABEL": "ስልክ",
+  "REG_CLASS_LABEL": "የተመረጠው ክፍል",
+  "REG_CONFIRM_PROMPT": "እባክዎ የምዝገባ መረጃዎን ትክክለኛነት ያረጋግጡ።",
+  "REG_CONFIRM": "አረጋግጥ",
+  "REG_CANCEL": "ሰርዝ",
+  "REG_CANCELLED": "ምዝገባው ተሰርዟል።",
+  "REG_SUCCESS": "የምዝገባ መረጃዎ በተሳካ ሁኔታ ደርሶናል።",
+  "REG_INVALID_PHONE": "እባክዎ ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ። ምሳሌ፦ 0912345678፣ 0712345678 ወይም +251912345678።",
+  "REG_INVALID_TEXT": "እባክዎ ጽሑፍ ብቻ ይላኩ።"
 }
