@@ -19,6 +19,13 @@ def get_gspread_client() -> gspread.Client:
     return gspread.authorize(credentials)
 
 
+def get_registration_worksheet():
+    settings = get_settings()
+    client = get_gspread_client()
+    spreadsheet = client.open_by_key(settings.google_sheets_spreadsheet_id)
+    return spreadsheet.sheet1
+
+
 def build_registration_row(registration: Registration) -> list[str]:
     created_at = registration.created_at.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -38,11 +45,32 @@ def build_registration_row(registration: Registration) -> list[str]:
 
 
 def append_registration_to_google_sheets(registration: Registration) -> None:
-    settings = get_settings()
-
-    client = get_gspread_client()
-    spreadsheet = client.open_by_key(settings.google_sheets_spreadsheet_id)
-    worksheet = spreadsheet.sheet1
-
+    worksheet = get_registration_worksheet()
     row = build_registration_row(registration)
     worksheet.append_row(row)
+
+
+def find_row_by_reference_code(reference_code: str) -> int | None:
+    worksheet = get_registration_worksheet()
+    values = worksheet.col_values(1)  # Column A = Reference Code
+
+    for index, value in enumerate(values, start=1):
+        if value == reference_code:
+            return index
+
+    return None
+
+
+def update_registration_status_in_google_sheets(
+    reference_code: str,
+    new_status: str,
+) -> bool:
+    worksheet = get_registration_worksheet()
+    row_number = find_row_by_reference_code(reference_code)
+
+    if row_number is None:
+        return False
+
+    status_column = 11  # Column K = Status
+    worksheet.update_cell(row_number, status_column, new_status)
+    return True

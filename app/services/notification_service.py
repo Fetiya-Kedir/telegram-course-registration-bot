@@ -27,7 +27,6 @@ def format_admin_registration_message(registration: Registration) -> str:
         f"{t(registration.language, 'ADMIN_USER_ID_LABEL')}: <code>{registration.telegram_user_id}</code>"
     )
 
-
 async def notify_admins_new_registration(bot: Bot, registration: Registration) -> None:
     settings = get_settings()
     message_text = format_admin_registration_message(registration)
@@ -37,4 +36,4 @@ async def notify_admins_new_registration(bot: Bot, registration: Registration) -
             chat_id=admin_id,
             text=message_text,
             reply_markup=admin_status_keyboard(registration.id),
-        )
+        ) 

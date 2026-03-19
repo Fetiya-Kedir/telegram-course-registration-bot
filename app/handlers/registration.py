@@ -1,3 +1,4 @@
+import asyncio
 import re
 
 from aiogram import Router, F
@@ -123,6 +124,9 @@ async def process_phone(message: Message, state: FSMContext) -> None:
 
 @router.callback_query(RegistrationForm.confirm, F.data == "reg:confirm")
 async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> None:
+    # Acknowledge the click immediately so Telegram stops showing the loading state.
+    await callback.answer()
+
     lang = get_user_language(callback.from_user.id)
     data = await state.get_data()
     settings = get_settings()
@@ -140,15 +144,6 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
             class_name=data["class_name"],
         )
 
-    try:
-        append_registration_to_google_sheets(registration)
-    except Exception as e:
-        print(f"Google Sheets append failed: {e}")
-
-    await notify_admins_new_registration(callback.bot, registration)
-
-    await state.clear()
-
     handoff_text = (
         f"<b>{t(lang, 'REG_HANDOFF_TITLE')}</b>\n\n"
         f"{t(lang, 'REG_HANDOFF_DESC')}\n\n"
@@ -157,11 +152,21 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
         f"<b>@{settings.admin_username}</b>"
     )
 
+    # Show success to the student first for better perceived speed.
     await callback.message.edit_text(
         text=handoff_text,
         reply_markup=contact_admin_keyboard(lang, settings.admin_username),
     )
-    await callback.answer()
+
+    await state.clear()
+
+    # Run blocking Google Sheets work in a thread so it does not block the event loop.
+    try:
+        await asyncio.to_thread(append_registration_to_google_sheets, registration)
+    except Exception as e:
+        print(f"Google Sheets append failed: {e}")
+
+    await notify_admins_new_registration(callback.bot, registration)
 
 @router.callback_query(F.data == "reg:cancel")
 async def cancel_registration(callback: CallbackQuery, state: FSMContext) -> None:

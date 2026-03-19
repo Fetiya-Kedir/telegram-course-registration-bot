@@ -32,10 +32,13 @@ async def create_registration(
     )
 
     session.add(registration)
-    await session.commit()
-    await session.refresh(registration)
+
+    # Flush assigns the database-generated ID without committing yet.
+    await session.flush()
 
     registration.reference_code = generate_reference_code(registration.id)
+
+    # Single commit after both ID generation and reference code assignment.
     await session.commit()
     await session.refresh(registration)
 
