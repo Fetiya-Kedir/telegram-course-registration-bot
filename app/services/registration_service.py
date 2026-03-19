@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.models import Registration
@@ -38,4 +39,29 @@ async def create_registration(
     await session.commit()
     await session.refresh(registration)
 
+    return registration
+
+
+async def get_registration_by_id(
+    session: AsyncSession,
+    registration_id: int,
+) -> Registration | None:
+    result = await session.execute(
+        select(Registration).where(Registration.id == registration_id)
+    )
+    return result.scalar_one_or_none()
+
+
+async def update_registration_status(
+    session: AsyncSession,
+    registration_id: int,
+    new_status: str,
+) -> Registration | None:
+    registration = await get_registration_by_id(session, registration_id)
+    if registration is None:
+        return None
+
+    registration.status = new_status
+    await session.commit()
+    await session.refresh(registration)
     return registration

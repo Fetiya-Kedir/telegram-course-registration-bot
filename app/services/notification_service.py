@@ -2,6 +2,7 @@ from aiogram import Bot
 
 from app.config.settings import get_settings
 from app.database.models import Registration
+from app.keyboards.admin import admin_status_keyboard
 from app.utils.i18n import t
 
 
@@ -21,6 +22,7 @@ def format_admin_registration_message(registration: Registration) -> str:
         f"{t(registration.language, 'ADMIN_PHONE_LABEL')}: <b>{registration.phone}</b>\n"
         f"{t(registration.language, 'ADMIN_CLASS_LABEL')}: <b>{registration.class_name}</b>\n"
         f"{t(registration.language, 'ADMIN_LANGUAGE_LABEL')}: <b>{lang_label}</b>\n"
+        f"{t(registration.language, 'ADMIN_STATUS_LABEL')}: <b>{registration.status}</b>\n"
         f"{t(registration.language, 'ADMIN_USERNAME_LABEL')}: <b>{username}</b>\n"
         f"{t(registration.language, 'ADMIN_USER_ID_LABEL')}: <code>{registration.telegram_user_id}</code>"
     )
@@ -31,4 +33,8 @@ async def notify_admins_new_registration(bot: Bot, registration: Registration) -
     message_text = format_admin_registration_message(registration)
 
     for admin_id in settings.admin_ids:
-        await bot.send_message(chat_id=admin_id, text=message_text)
+        await bot.send_message(
+            chat_id=admin_id,
+            text=message_text,
+            reply_markup=admin_status_keyboard(registration.id),
+        )

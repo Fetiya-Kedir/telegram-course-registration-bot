@@ -14,7 +14,7 @@
   "CONTACT_DESC": "Telegram support contact will be added next.",
 
   "NAV_BACK_MAIN": "↩️ Back to Main Menu",
- 
+
   "FAQ_TITLE": "Frequently Asked Questions",
   "FAQ_PROMPT": "Choose a question below:",
   "FAQ_Q1": "How do I register?",
@@ -70,6 +70,11 @@
   "ADMIN_USERNAME_MISSING": "Not available",
 
   "REG_REFERENCE_LABEL": "Reference Code",
-  "ADMIN_REFERENCE_LABEL": "Reference Code"
+  "ADMIN_REFERENCE_LABEL": "Reference Code",
+
+  "ADMIN_STATUS_UPDATED": "Registration status updated successfully.",
+  "ADMIN_STATUS_LABEL": "Status",
+  "ADMIN_REG_NOT_FOUND": "Registration not found.",
+  "ADMIN_NOT_AUTHORIZED": "You are not authorized to perform this action."
 }
 
