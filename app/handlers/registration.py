@@ -14,6 +14,7 @@ from app.services.registration_service import create_registration
 from app.config.settings import get_settings
 from app.keyboards.contact import contact_admin_keyboard
 from app.services.notification_service import notify_admins_new_registration
+from app.services.google_sheets_service import append_registration_to_google_sheets
 router = Router()
 
 
@@ -138,6 +139,11 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
             class_id=data["class_id"],
             class_name=data["class_name"],
         )
+
+    try:
+        append_registration_to_google_sheets(registration)
+    except Exception as e:
+        print(f"Google Sheets append failed: {e}")
 
     await notify_admins_new_registration(callback.bot, registration)
 

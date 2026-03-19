@@ -5,16 +5,16 @@
   "LANGUAGE_SELECTED": "Language set to English.",
   "MAIN_MENU_TITLE": "Main Menu",
   "MAIN_MENU_PROMPT": "Please choose one of the following options:",
-  "MENU_REGISTER": "Register for a Class",
-  "MENU_FAQ": "FAQs",
-  "MENU_CONTACT_ADMIN": "Contact Admin",
-  "MENU_CHANGE_LANGUAGE": "Change Language",
+  "MENU_REGISTER": "📜 Register for a Class",
+  "MENU_FAQ": "📩 FAQs",
+  "MENU_CONTACT_ADMIN": "📞 Contact Admin",
+  "MENU_CHANGE_LANGUAGE": "🌐 Change Language",
 
-  "CONTACT_TITLE": "Contact Admin",
+  "CONTACT_TITLE": "📞 Contact Admin",
   "CONTACT_DESC": "Telegram support contact will be added next.",
 
-  "NAV_BACK_MAIN": "Back to Main Menu",
-
+  "NAV_BACK_MAIN": "↩️ Back to Main Menu",
+ 
   "FAQ_TITLE": "Frequently Asked Questions",
   "FAQ_PROMPT": "Choose a question below:",
   "FAQ_Q1": "How do I register?",
