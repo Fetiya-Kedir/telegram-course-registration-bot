@@ -75,6 +75,18 @@
   "ADMIN_STATUS_UPDATED": "Registration status updated successfully.",
   "ADMIN_STATUS_LABEL": "Status",
   "ADMIN_REG_NOT_FOUND": "Registration not found.",
-  "ADMIN_NOT_AUTHORIZED": "You are not authorized to perform this action."
+  "ADMIN_NOT_AUTHORIZED": "You are not authorized to perform this action.",
+
+  "STUDENT_STATUS_UPDATE_TITLE": "Registration Update",
+  "STUDENT_STATUS_REFERENCE_LABEL": "Reference Code",
+  "STUDENT_STATUS_CONTACTED": "Your registration is now being handled by the class admin. Please check your Telegram messages and continue the next steps.",
+  "STUDENT_STATUS_PAYMENT_PENDING": "Your registration is awaiting payment confirmation.",
+  "STUDENT_STATUS_PAID": "Your payment has been recorded successfully.",
+  "STUDENT_STATUS_JOINED": "Congratulations! You have now received permission to access the private Telegram group account. You have been registered as a participant in the class.",
+  "STUDENT_STATUS_CANCELLED": "Your registration has been cancelled. Please contact the admin if this was a mistake.",
+  "FORM_BACK": "Back",
+  "FORM_CANCEL": "Cancel",
+  "FORM_CANCELLED": "Registration cancelled. You have been returned to the main menu.",
+  "REG_CONFIRM_ACTION": "Choose one of the options below."
 }
 

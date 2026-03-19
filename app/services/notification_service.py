@@ -3,6 +3,7 @@ from aiogram import Bot
 from app.config.settings import get_settings
 from app.database.models import Registration
 from app.keyboards.admin import admin_status_keyboard
+from app.keyboards.student import student_main_menu_keyboard
 from app.utils.i18n import t
 
 
@@ -27,6 +28,7 @@ def format_admin_registration_message(registration: Registration) -> str:
         f"{t(registration.language, 'ADMIN_USER_ID_LABEL')}: <code>{registration.telegram_user_id}</code>"
     )
 
+
 async def notify_admins_new_registration(bot: Bot, registration: Registration) -> None:
     settings = get_settings()
     message_text = format_admin_registration_message(registration)
@@ -36,4 +38,39 @@ async def notify_admins_new_registration(bot: Bot, registration: Registration) -
             chat_id=admin_id,
             text=message_text,
             reply_markup=admin_status_keyboard(registration.id),
-        ) 
+        )
+
+
+def build_student_status_message(registration: Registration) -> str:
+    lang = registration.language
+
+    status_key_map = {
+        "contacted": "STUDENT_STATUS_CONTACTED",
+        "payment_pending": "STUDENT_STATUS_PAYMENT_PENDING",
+        "paid": "STUDENT_STATUS_PAID",
+        "joined": "STUDENT_STATUS_JOINED",
+        "cancelled": "STUDENT_STATUS_CANCELLED",
+    }
+
+    message_key = status_key_map.get(registration.status)
+    if not message_key:
+        return ""
+
+    return (
+        f"<b>{t(lang, 'STUDENT_STATUS_UPDATE_TITLE')}</b>\n\n"
+        f"{t(lang, message_key)}\n\n"
+        f"{t(lang, 'STUDENT_STATUS_REFERENCE_LABEL')}: <b>{registration.reference_code}</b>"
+    )
+
+
+async def notify_student_status_update(bot: Bot, registration: Registration) -> None:
+    message_text = build_student_status_message(registration)
+
+    if not message_text:
+        return
+
+    await bot.send_message(
+        chat_id=registration.telegram_user_id,
+        text=message_text,
+        reply_markup=student_main_menu_keyboard(registration.language),
+    )

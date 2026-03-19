@@ -6,6 +6,7 @@ from app.config.settings import get_settings
 from app.database.session import AsyncSessionLocal
 from app.keyboards.admin import admin_status_keyboard
 from app.services.google_sheets_service import update_registration_status_in_google_sheets
+from app.services.notification_service import notify_student_status_update
 from app.services.registration_service import update_registration_status
 from app.utils.i18n import t
 
@@ -87,3 +88,9 @@ async def admin_status_update_handler(callback: CallbackQuery) -> None:
         )
     except Exception as e:
         print(f"Google Sheets status update failed: {e}")
+
+    # Notify the student about the status change.
+    try:
+        await notify_student_status_update(callback.bot, registration)
+    except Exception as e:
+        print(f"Student status notification failed: {e}")

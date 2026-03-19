@@ -3,19 +3,21 @@ import re
 
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 
-from app.keyboards.registration import registration_confirm_keyboard
+from app.config.settings import get_settings
+from app.database.session import AsyncSessionLocal
+from app.keyboards.contact import registration_handoff_keyboard
+from app.keyboards.form_navigation import form_navigation_keyboard
 from app.keyboards.menu import main_menu_keyboard
+from app.keyboards.registration import registration_confirm_keyboard
+from app.services.google_sheets_service import append_registration_to_google_sheets
+from app.services.notification_service import notify_admins_new_registration
+from app.services.registration_service import create_registration
 from app.services.user_language import get_user_language
 from app.states.registration import RegistrationForm
 from app.utils.i18n import t
-from app.database.session import AsyncSessionLocal
-from app.services.registration_service import create_registration
-from app.config.settings import get_settings
-from app.keyboards.contact import contact_admin_keyboard
-from app.services.notification_service import notify_admins_new_registration
-from app.services.google_sheets_service import append_registration_to_google_sheets
+
 router = Router()
 
 
@@ -56,6 +58,15 @@ def normalize_phone(phone: str) -> str:
 
     return cleaned
 
+
+def is_back_command(text: str, lang: str) -> bool:
+    return text == t(lang, "FORM_BACK")
+
+
+def is_cancel_command(text: str, lang: str) -> bool:
+    return text == t(lang, "FORM_CANCEL")
+
+
 @router.callback_query(F.data.startswith("class:"))
 async def start_registration_from_class(callback: CallbackQuery, state: FSMContext) -> None:
     lang = get_user_language(callback.from_user.id)
@@ -66,8 +77,14 @@ async def start_registration_from_class(callback: CallbackQuery, state: FSMConte
     await state.set_state(RegistrationForm.full_name)
 
     await callback.message.edit_text(
-    text=f"<b>{class_name}</b>\n\n{t(lang, 'REG_ASK_NAME')}"
-)
+        text=f"<b>{class_name}</b>\n\n{t(lang, 'REG_ASK_NAME')}"
+    )
+
+    await callback.message.answer(
+        t(lang, "REG_ASK_NAME"),
+        reply_markup=form_navigation_keyboard(lang),
+    )
+
     await callback.answer()
 
 
@@ -76,12 +93,33 @@ async def process_full_name(message: Message, state: FSMContext) -> None:
     lang = get_user_language(message.from_user.id)
 
     if not message.text:
-        await message.answer(t(lang, "REG_INVALID_TEXT"))
+        await message.answer(
+            t(lang, "REG_INVALID_TEXT"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
+        return
+
+    if is_cancel_command(message.text, lang):
+        await state.clear()
+        await message.answer(
+            t(lang, "FORM_CANCELLED"),
+            reply_markup=main_menu_keyboard(lang),
+        )
+        return
+
+    if is_back_command(message.text, lang):
+        await message.answer(
+            t(lang, "REG_ASK_NAME"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
         return
 
     await state.update_data(full_name=message.text.strip())
     await state.set_state(RegistrationForm.department)
-    await message.answer(t(lang, "REG_ASK_DEPARTMENT"))
+    await message.answer(
+        t(lang, "REG_ASK_DEPARTMENT"),
+        reply_markup=form_navigation_keyboard(lang),
+    )
 
 
 @router.message(RegistrationForm.department)
@@ -89,12 +127,34 @@ async def process_department(message: Message, state: FSMContext) -> None:
     lang = get_user_language(message.from_user.id)
 
     if not message.text:
-        await message.answer(t(lang, "REG_INVALID_TEXT"))
+        await message.answer(
+            t(lang, "REG_INVALID_TEXT"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
+        return
+
+    if is_cancel_command(message.text, lang):
+        await state.clear()
+        await message.answer(
+            t(lang, "FORM_CANCELLED"),
+            reply_markup=main_menu_keyboard(lang),
+        )
+        return
+
+    if is_back_command(message.text, lang):
+        await state.set_state(RegistrationForm.full_name)
+        await message.answer(
+            t(lang, "REG_ASK_NAME"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
         return
 
     await state.update_data(department=message.text.strip())
     await state.set_state(RegistrationForm.phone)
-    await message.answer(t(lang, "REG_ASK_PHONE"))
+    await message.answer(
+        t(lang, "REG_ASK_PHONE"),
+        reply_markup=form_navigation_keyboard(lang),
+    )
 
 
 @router.message(RegistrationForm.phone)
@@ -102,12 +162,34 @@ async def process_phone(message: Message, state: FSMContext) -> None:
     lang = get_user_language(message.from_user.id)
 
     if not message.text:
-        await message.answer(t(lang, "REG_INVALID_TEXT"))
+        await message.answer(
+            t(lang, "REG_INVALID_TEXT"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
+        return
+
+    if is_cancel_command(message.text, lang):
+        await state.clear()
+        await message.answer(
+            t(lang, "FORM_CANCELLED"),
+            reply_markup=main_menu_keyboard(lang),
+        )
+        return
+
+    if is_back_command(message.text, lang):
+        await state.set_state(RegistrationForm.department)
+        await message.answer(
+            t(lang, "REG_ASK_DEPARTMENT"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
         return
 
     phone = message.text.strip()
     if not is_valid_phone(phone):
-        await message.answer(t(lang, "REG_INVALID_PHONE"))
+        await message.answer(
+            t(lang, "REG_INVALID_PHONE"),
+            reply_markup=form_navigation_keyboard(lang),
+        )
         return
 
     normalized_phone = normalize_phone(phone)
@@ -118,13 +200,16 @@ async def process_phone(message: Message, state: FSMContext) -> None:
 
     await message.answer(
         registration_summary_text(lang, data),
+        reply_markup=ReplyKeyboardRemove(),
+    )
+    await message.answer(
+        t(lang, "REG_CONFIRM_ACTION"),
         reply_markup=registration_confirm_keyboard(lang),
     )
 
 
 @router.callback_query(RegistrationForm.confirm, F.data == "reg:confirm")
 async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> None:
-    # Acknowledge the click immediately so Telegram stops showing the loading state.
     await callback.answer()
 
     lang = get_user_language(callback.from_user.id)
@@ -152,21 +237,20 @@ async def confirm_registration(callback: CallbackQuery, state: FSMContext) -> No
         f"<b>@{settings.admin_username}</b>"
     )
 
-    # Show success to the student first for better perceived speed.
     await callback.message.edit_text(
         text=handoff_text,
-        reply_markup=contact_admin_keyboard(lang, settings.admin_username),
+        reply_markup=registration_handoff_keyboard(lang, settings.admin_username),
     )
 
     await state.clear()
 
-    # Run blocking Google Sheets work in a thread so it does not block the event loop.
     try:
         await asyncio.to_thread(append_registration_to_google_sheets, registration)
     except Exception as e:
         print(f"Google Sheets append failed: {e}")
 
     await notify_admins_new_registration(callback.bot, registration)
+
 
 @router.callback_query(F.data == "reg:cancel")
 async def cancel_registration(callback: CallbackQuery, state: FSMContext) -> None:
