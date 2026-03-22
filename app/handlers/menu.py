@@ -6,6 +6,8 @@ from app.keyboards.faq import faq_keyboard
 from app.keyboards.classes import classes_keyboard
 from app.keyboards.navigation import back_to_main_keyboard
 from app.services.user_language import get_user_language
+from app.config.settings import get_settings
+from app.keyboards.contact import contact_admin_menu_keyboard
 from app.utils.i18n import t
 
 router = Router()
@@ -68,6 +70,7 @@ async def register_menu_handler(callback: CallbackQuery) -> None:
 @router.callback_query(F.data == "menu:contact")
 async def contact_admin_handler(callback: CallbackQuery) -> None:
     lang = get_user_language(callback.from_user.id)
+    settings = get_settings()
 
     text = (
         f"<b>{t(lang, 'CONTACT_TITLE')}</b>\n\n"
@@ -76,7 +79,7 @@ async def contact_admin_handler(callback: CallbackQuery) -> None:
 
     await callback.message.edit_text(
         text=text,
-        reply_markup=back_to_main_keyboard(lang),
+        reply_markup=contact_admin_menu_keyboard(lang, settings.admin_username),
     )
     await callback.answer()
 

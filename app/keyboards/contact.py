@@ -20,3 +20,22 @@ def registration_handoff_keyboard(lang: str, admin_username: str) -> InlineKeybo
             ],
         ]
     )
+
+
+def contact_admin_menu_keyboard(lang: str, admin_username: str) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text=t(lang, "CONTACT_ADMIN_BUTTON"),
+                    url=f"https://t.me/{admin_username}",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text=t(lang, "NAV_BACK_MAIN"),
+                    callback_data="menu:main",
+                )
+            ],
+        ]
+    )

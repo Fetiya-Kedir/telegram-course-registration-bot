@@ -8,11 +8,11 @@
   "MENU_REGISTER": "📜 Register for a Class",
   "MENU_FAQ": "📩 FAQs",
   "MENU_CONTACT_ADMIN": "📞 Contact Admin",
+  "CONTACT_TITLE": "📞 Contact Admin",
+  "CONTACT_DESC": "For detailed information and personal assistance with registration, payment, class access, or any other questions, please contact our class admin through the Telegram account below.\n\nWe are ready to support you throughout the process.",
   "MENU_CHANGE_LANGUAGE": "🌐 Change Language",
 
-  "CONTACT_TITLE": "📞 Contact Admin",
-  "CONTACT_DESC": "Telegram support contact will be added next.",
-
+  
   "NAV_BACK_MAIN": "↩️ Back to Main Menu",
 
   "FAQ_TITLE": "Frequently Asked Questions",
