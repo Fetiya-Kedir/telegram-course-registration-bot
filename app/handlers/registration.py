@@ -77,7 +77,8 @@ async def start_registration_from_class(callback: CallbackQuery, state: FSMConte
     await state.set_state(RegistrationForm.full_name)
 
     await callback.message.edit_text(
-        text=f"<b>{class_name}</b>\n\n{t(lang, 'REG_ASK_NAME')}"
+        text=f"<b>{class_name}</b>\n\n{t(lang, 'REG_CONF')}",
+        reply_markup=None,
     )
 
     await callback.message.answer(
@@ -198,12 +199,16 @@ async def process_phone(message: Message, state: FSMContext) -> None:
     data = await state.get_data()
     await state.set_state(RegistrationForm.confirm)
 
-    await message.answer(
-        registration_summary_text(lang, data),
+    # Remove the Back/Cancel reply keyboard cleanly
+    cleanup_message = await message.answer(
+        "✅",
         reply_markup=ReplyKeyboardRemove(),
     )
+    await cleanup_message.delete()
+
+    # Send only one confirmation message with inline buttons
     await message.answer(
-        t(lang, "REG_CONFIRM_ACTION"),
+        registration_summary_text(lang, data),
         reply_markup=registration_confirm_keyboard(lang),
     )
 
