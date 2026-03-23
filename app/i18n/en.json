@@ -12,7 +12,6 @@
   "CONTACT_DESC": "For detailed information and personal assistance with registration, payment, class access, or any other questions, please contact our class admin through the Telegram account below.\n\nWe are ready to support you throughout the process.",
   "MENU_CHANGE_LANGUAGE": "🌐 Change Language",
 
-  
   "NAV_BACK_MAIN": "↩️ Back to Main Menu",
 
   "FAQ_TITLE": "Frequently Asked Questions",
@@ -68,6 +67,11 @@
   "ADMIN_USERNAME_LABEL": "Username",
   "ADMIN_USER_ID_LABEL": "User ID",
   "ADMIN_USERNAME_MISSING": "Not available",
+  "ADMIN_DURATION_LABEL": "Course Duration",
+  "ADMIN_MONTHS_PAID_LABEL": "Months Paid",
+  "ADMIN_PAYMENT_PROGRESS_LABEL": "Payment Progress",
+  "ADMIN_DURATION_NOT_SET": "Not set",
+  "ADMIN_DURATION_UPDATED": "Course duration updated successfully.", 
 
   "REG_REFERENCE_LABEL": "Reference Code",
   "ADMIN_REFERENCE_LABEL": "Reference Code",
@@ -89,4 +93,3 @@
   "FORM_CANCELLED": "Registration cancelled. You have been returned to the main menu.",
   "REG_CONFIRM_ACTION": "Choose one of the options below."
 }
-

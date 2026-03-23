@@ -7,7 +7,7 @@
   "MAIN_MENU_PROMPT": "እባክዎ ከሚከተሉት አማራጮች አንዱን ይምረጡ፦",
   "MENU_REGISTER": "📜 ለክፍል ይመዝገቡ",
   "MENU_FAQ": "📩 ተደጋጋሚ ጥያቄዎች (FAQs)",
-  
+
   "MENU_CONTACT_ADMIN": "📞 አስተዳዳሪውን ያግኙ",
   "CONTACT_TITLE": "📞 አስተዳዳሪውን ያግኙ",
   "CONTACT_DESC": "ስለ ምዝገባ፣ ክፍያ፣ የክፍል መግቢያ ወይም ስለማንኛውም ጥያቄ ዝርዝር መረጃ እና የግል እገዛ ለማግኘት፣ እባክዎ ከታች ያለውን የቴሌግራም አድራሻ በመጠቀም የክፍሉን አስተዳዳሪ ያግኙ።\n\nበሂደቱ ሁሉ እርስዎን ለመርዳት ዝግጁ ነን።",
@@ -69,6 +69,11 @@
   "ADMIN_USERNAME_LABEL": "ዩዘርኔም",
   "ADMIN_USER_ID_LABEL": "ዩዘር መለያ",
   "ADMIN_USERNAME_MISSING": "የለም",
+  "ADMIN_DURATION_LABEL": "የትምህርቱ ቆይታ",
+  "ADMIN_MONTHS_PAID_LABEL": "የተከፈለባቸው ወራት",
+  "ADMIN_PAYMENT_PROGRESS_LABEL": "የክፍያ ሁኔታ",
+  "ADMIN_DURATION_NOT_SET": "አልተወሰነም",
+  "ADMIN_DURATION_UPDATED": "የትምህርቱ ቆይታ በተሳካ ሁኔታ ተሻሽሏል።",
 
   "STUDENT_STATUS_UPDATE_TITLE": "የምዝገባ ሁኔታ ማሻሻያ",
   "STUDENT_STATUS_REFERENCE_LABEL": "የማጣቀሻ ኮድ",

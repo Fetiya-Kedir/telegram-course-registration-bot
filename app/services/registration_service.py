@@ -28,17 +28,17 @@ async def create_registration(
         language=language,
         class_id=class_id,
         class_name=class_name,
+        course_duration_months=0,
+        months_paid=0,
         status="new",
     )
 
     session.add(registration)
 
-    # Flush assigns the database-generated ID without committing yet.
     await session.flush()
 
     registration.reference_code = generate_reference_code(registration.id)
 
-    # Single commit after both ID generation and reference code assignment.
     await session.commit()
     await session.refresh(registration)
 
@@ -65,6 +65,21 @@ async def update_registration_status(
         return None
 
     registration.status = new_status
+    await session.commit()
+    await session.refresh(registration)
+    return registration
+
+
+async def update_course_duration(
+    session: AsyncSession,
+    registration_id: int,
+    duration_months: int,
+) -> Registration | None:
+    registration = await get_registration_by_id(session, registration_id)
+    if registration is None:
+        return None
+
+    registration.course_duration_months = duration_months
     await session.commit()
     await session.refresh(registration)
     return registration

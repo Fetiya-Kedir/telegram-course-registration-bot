@@ -38,6 +38,8 @@ def build_registration_row(registration: Registration) -> list[str]:
         registration.language,
         registration.class_id,
         registration.class_name,
+        str(registration.course_duration_months),
+        str(registration.months_paid),
         str(registration.telegram_user_id),
         registration.telegram_username or "",
         registration.status,
@@ -52,7 +54,7 @@ def append_registration_to_google_sheets(registration: Registration) -> None:
 
 def find_row_by_reference_code(reference_code: str) -> int | None:
     worksheet = get_registration_worksheet()
-    values = worksheet.col_values(1)  # Column A = Reference Code
+    values = worksheet.col_values(1)
 
     for index, value in enumerate(values, start=1):
         if value == reference_code:
@@ -71,6 +73,21 @@ def update_registration_status_in_google_sheets(
     if row_number is None:
         return False
 
-    status_column = 11  # Column K = Status
+    status_column = 13  # Column M
     worksheet.update_cell(row_number, status_column, new_status)
+    return True
+
+
+def update_course_duration_in_google_sheets(
+    reference_code: str,
+    duration_months: int,
+) -> bool:
+    worksheet = get_registration_worksheet()
+    row_number = find_row_by_reference_code(reference_code)
+
+    if row_number is None:
+        return False
+
+    duration_column = 9  # Column I = Course Duration Months
+    worksheet.update_cell(row_number, duration_column, duration_months)
     return True

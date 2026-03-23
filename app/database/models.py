@@ -20,5 +20,9 @@ class Registration(Base):
     language: Mapped[str] = mapped_column(String(10))
     class_id: Mapped[str] = mapped_column(String(20))
     class_name: Mapped[str] = mapped_column(String(200))
+
+    course_duration_months: Mapped[int] = mapped_column(Integer, default=1)
+    months_paid: Mapped[int] = mapped_column(Integer, default=0)
+
     status: Mapped[str] = mapped_column(String(50), default="new")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
