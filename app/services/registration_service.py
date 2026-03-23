@@ -83,3 +83,17 @@ async def update_course_duration(
     await session.commit()
     await session.refresh(registration)
     return registration
+
+
+async def increment_months_paid(
+    session: AsyncSession,
+    registration_id: int,
+) -> Registration | None:
+    registration = await get_registration_by_id(session, registration_id)
+    if registration is None:
+        return None
+
+    registration.months_paid += 1
+    await session.commit()
+    await session.refresh(registration)
+    return registration

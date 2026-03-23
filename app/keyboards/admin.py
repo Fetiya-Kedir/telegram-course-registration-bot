@@ -23,3 +23,12 @@ def admin_duration_keyboard(registration_id: int) -> InlineKeyboardMarkup:
 
     builder.adjust(1, 1, 1)
     return builder.as_markup()
+
+
+def admin_payment_keyboard(registration_id: int) -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+
+    builder.button(text="+1 Payment", callback_data=f"admin_payment:{registration_id}:increment")
+
+    builder.adjust(1)
+    return builder.as_markup()

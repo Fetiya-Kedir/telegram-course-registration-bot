@@ -88,6 +88,21 @@ def update_course_duration_in_google_sheets(
     if row_number is None:
         return False
 
-    duration_column = 9  # Column I = Course Duration Months
+    duration_column = 9  # Column I
     worksheet.update_cell(row_number, duration_column, duration_months)
+    return True
+
+
+def update_months_paid_in_google_sheets(
+    reference_code: str,
+    months_paid: int,
+) -> bool:
+    worksheet = get_registration_worksheet()
+    row_number = find_row_by_reference_code(reference_code)
+
+    if row_number is None:
+        return False
+
+    months_paid_column = 10  # Column J
+    worksheet.update_cell(row_number, months_paid_column, months_paid)
     return True
