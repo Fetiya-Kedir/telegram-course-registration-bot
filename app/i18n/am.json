@@ -75,6 +75,11 @@
   "ADMIN_DURATION_NOT_SET": "አልተወሰነም",
   "ADMIN_DURATION_UPDATED": "የትምህርቱ ቆይታ በተሳካ ሁኔታ ተሻሽሏል።",
 
+  "STUDENT_PAYMENT_UPDATE_TITLE": "የክፍያ ሁኔታ ማሻሻያ",
+  "STUDENT_PAYMENT_RECORDED": "የከፈሉት ክፍያ በተሳካ ሁኔታ ተመዝግቧል።",
+  "STUDENT_PAYMENT_PROGRESS_LABEL": "የክፍያ ሂደት",
+  "STUDENT_PAYMENT_FULLY_PAID": "የትምህርት ክፍያዎን ሙሉ በሙሉ አጠናቀዋል።",
+
   "STUDENT_STATUS_UPDATE_TITLE": "የምዝገባ ሁኔታ ማሻሻያ",
   "STUDENT_STATUS_REFERENCE_LABEL": "የማጣቀሻ ኮድ",
   "STUDENT_STATUS_CONTACTED": "ምዝገባዎ በክፍሉ አስተዳዳሪ እየታየ ነው። እባክዎ የቴሌግራም መልዕክትዎን ያረጋግጡና ቀጣዮቹን ደረጃዎች ይከተሉ።",

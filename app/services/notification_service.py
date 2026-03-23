@@ -2,9 +2,24 @@ from aiogram import Bot
 
 from app.config.settings import get_settings
 from app.database.models import Registration
-from app.keyboards.admin import admin_status_keyboard, admin_duration_keyboard
+from app.keyboards.admin import admin_status_keyboard, admin_duration_keyboard, admin_payment_keyboard
 from app.keyboards.student import student_main_menu_keyboard
 from app.utils.i18n import t
+
+
+def admin_combined_keyboard(registration_id: int):
+    from aiogram.types import InlineKeyboardMarkup
+
+    status_markup = admin_status_keyboard(registration_id)
+    duration_markup = admin_duration_keyboard(registration_id)
+    payment_markup = admin_payment_keyboard(registration_id)
+
+    combined_rows = (
+        status_markup.inline_keyboard
+        + duration_markup.inline_keyboard
+        + payment_markup.inline_keyboard
+    )
+    return InlineKeyboardMarkup(inline_keyboard=combined_rows)
 
 
 def format_payment_progress(registration: Registration) -> str:
@@ -92,11 +107,36 @@ async def notify_student_status_update(bot: Bot, registration: Registration) -> 
     )
 
 
-def admin_combined_keyboard(registration_id: int):
-    from aiogram.types import InlineKeyboardMarkup
+def build_student_payment_message(registration: Registration) -> str:
+    lang = registration.language
 
-    status_markup = admin_status_keyboard(registration_id)
-    duration_markup = admin_duration_keyboard(registration_id)
+    progress_text = (
+        f"{registration.months_paid} / {registration.course_duration_months}"
+        if registration.course_duration_months > 0
+        else t(lang, "ADMIN_DURATION_NOT_SET")
+    )
 
-    combined_rows = status_markup.inline_keyboard + duration_markup.inline_keyboard
-    return InlineKeyboardMarkup(inline_keyboard=combined_rows)
+    fully_paid_line = ""
+    if (
+        registration.course_duration_months > 0
+        and registration.months_paid >= registration.course_duration_months
+    ):
+        fully_paid_line = f"\n\n{t(lang, 'STUDENT_PAYMENT_FULLY_PAID')}"
+
+    return (
+        f"<b>{t(lang, 'STUDENT_PAYMENT_UPDATE_TITLE')}</b>\n\n"
+        f"{t(lang, 'STUDENT_PAYMENT_RECORDED')}\n\n"
+        f"{t(lang, 'STUDENT_PAYMENT_PROGRESS_LABEL')}: <b>{progress_text}</b>"
+        f"{fully_paid_line}\n\n"
+        f"{t(lang, 'STUDENT_STATUS_REFERENCE_LABEL')}: <b>{registration.reference_code}</b>"
+    )
+
+
+async def notify_student_payment_update(bot: Bot, registration: Registration) -> None:
+    message_text = build_student_payment_message(registration)
+
+    await bot.send_message(
+        chat_id=registration.telegram_user_id,
+        text=message_text,
+        reply_markup=student_main_menu_keyboard(registration.language),
+    )

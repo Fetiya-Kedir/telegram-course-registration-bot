@@ -15,7 +15,10 @@ from app.services.google_sheets_service import (
     update_course_duration_in_google_sheets,
     update_months_paid_in_google_sheets,
 )
-from app.services.notification_service import notify_student_status_update
+from app.services.notification_service import (
+    notify_student_status_update,
+    notify_student_payment_update,
+)
 from app.services.registration_service import (
     update_registration_status,
     update_course_duration,
@@ -234,3 +237,8 @@ async def admin_payment_increment_handler(callback: CallbackQuery) -> None:
         )
     except Exception as e:
         print(f"Google Sheets months_paid update failed: {e}")
+
+    try:
+        await notify_student_payment_update(callback.bot, registration)
+    except Exception as e:
+        print(f"Student payment notification failed: {e}")

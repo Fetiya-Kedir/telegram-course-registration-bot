@@ -76,6 +76,11 @@
   "ADMIN_FULLY_PAID": "This course is already fully paid.",
   "ADMIN_PAYMENT_RECORDED": "Payment recorded successfully.",
 
+  "STUDENT_PAYMENT_UPDATE_TITLE": "Payment Update",
+  "STUDENT_PAYMENT_RECORDED": "Your payment has been recorded successfully.",
+  "STUDENT_PAYMENT_PROGRESS_LABEL": "Payment Progress",
+  "STUDENT_PAYMENT_FULLY_PAID": "Your course is now fully paid.",
+
   "REG_REFERENCE_LABEL": "Reference Code",
   "ADMIN_REFERENCE_LABEL": "Reference Code",
 
