@@ -1,3 +1,5 @@
+import json
+
 from google.oauth2.service_account import Credentials
 import gspread
 
@@ -11,10 +13,17 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 def get_gspread_client() -> gspread.Client:
     settings = get_settings()
 
-    credentials = Credentials.from_service_account_file(
-        settings.google_service_account_file,
-        scopes=SCOPES,
-    )
+    if settings.google_service_account_json:
+        service_account_info = json.loads(settings.google_service_account_json)
+        credentials = Credentials.from_service_account_info(
+            service_account_info,
+            scopes=SCOPES,
+        )
+    else:
+        credentials = Credentials.from_service_account_file(
+            settings.google_service_account_file,
+            scopes=SCOPES,
+        )
 
     return gspread.authorize(credentials)
 

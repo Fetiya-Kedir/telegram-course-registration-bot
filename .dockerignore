@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+.env
+bot.db
+credentials/
+.git
+.gitignore
+.vscode/
+.idea/
+.DS_Store
